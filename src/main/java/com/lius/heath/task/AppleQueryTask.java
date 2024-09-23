@@ -56,7 +56,6 @@ public class AppleQueryTask {
             "&parts.1=MYTP3ZA/A" +
             "&parts.2=MYTQ3ZA/A" +
             "&parts.3=MYTM3ZA/A" +
-            "&parts.4=MVX33ZP/A" +
             "&searchNearby=true&store=R409}")
     private String connectUrl;
 
@@ -117,7 +116,7 @@ public class AppleQueryTask {
             mailInfoInput.setReceiveName("刘硕");
             mailInfoInput.setMsgContent("可预约通知： " + noticeContent);
             logger.info("开始发送邮件通知给：" + receiveEmail);
-//            noticeService.sendEmail(mailInfoInput);
+            noticeService.sendEmail(mailInfoInput);
             logger.info("完成邮件发送通知");
             logger.info(str);
         }
