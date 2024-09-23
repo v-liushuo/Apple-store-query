@@ -18,14 +18,6 @@
         <java.version>1.8</java.version>
     </properties>
     <repositories>
-        <!-- 项目组nexus私服，已包括khala组件和中央仓库全部内容，不建议修改 -->
-        <repository>
-            <id>public</id>
-            <name>Public Repositories</name>
-            <layout>default</layout>
-            <!-- <url>http://132.122.1.22:8081/nexus/content/groups/public/</url> -->
-            <url>http://192.168.115.17:8081/repository/maven-public/</url>
-        </repository>
         <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
@@ -35,30 +27,6 @@
             </snapshots>
         </repository>
     </repositories>
-
-    <pluginRepositories>
-        <!-- 项目组nexus私服，已包括khala组件和中央仓库全部内容，不建议修改 -->
-        <pluginRepository>
-            <id>public</id>
-            <name>Public Repositories</name>
-            <layout>default</layout>
-            <!-- <url>http://132.122.1.22:8081/nexus/content/groups/public/</url> -->
-            <url>http://192.168.115.17:8081/repository/maven-public/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <!-- <url>http://132.122.1.22:8081/nexus/content/repositories/releases</url> -->
-            <url>http://192.168.115.17:8081/repository/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <!-- <url>http://132.122.1.22:8081/nexus/content/repositories/snapshots</url> -->
-            <url>http://192.168.115.17:8081/repository/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
