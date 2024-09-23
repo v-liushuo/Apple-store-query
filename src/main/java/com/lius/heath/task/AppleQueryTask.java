@@ -92,7 +92,6 @@ public class AppleQueryTask {
                         String name = jsonObject2.getJSONObject("messageTypes").getJSONObject("compact").getString("storePickupProductTitle");
                         orDefault.add(name);
                         storeHasProduct.put(storeName, orDefault);
-                        break;
                     }
                 }
             }
