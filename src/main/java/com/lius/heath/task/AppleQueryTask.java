@@ -19,13 +19,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -66,11 +63,19 @@ public class AppleQueryTask {
 
     @Scheduled(cron = "0/3 * * * * ? ")
     public void handle() {
+        LocalDateTime now1 = LocalDateTime.now();
+        LocalTime endDate = LocalTime.of(23, 0);
+        LocalTime startDate = LocalTime.of(6, 0);
+
+        if (LocalTime.now().isAfter(endDate) || LocalTime.now().isBefore(startDate)) {
+            logger.warn("暂未到开始时间,执行时间段为：{} 点到{}点", startDate.getHour(), endDate.getHour());
+            return;
+        }
         ResponseEntity<String> response;
         try {
             response = restTemplate.getForEntity(connectUrl, String.class);
         } catch (RestClientException e) {
-            logger.error("request error:{}", dateTimeFormatter.format(LocalDateTime.now()));
+            logger.error("request error:{}", dateTimeFormatter.format(now1));
             return;
         }
         String str = response.getBody();
@@ -118,8 +123,9 @@ public class AppleQueryTask {
             noticeService.sendEmail(mailInfoInput);
             logger.info("完成邮件发送通知");
             logger.info(str);
+        } else {
+            LocalDateTime now = now1;
+            logger.info("当前时间" + dateTimeFormatter.format(now));
         }
-        LocalDateTime now = LocalDateTime.now();
-        logger.info("当前时间" + dateTimeFormatter.format(now));
     }
 }
